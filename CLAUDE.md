@@ -55,7 +55,7 @@ Note: `dep-auditor` and `health-check` are agent types, not slash commands. Trig
 - `.claude/` in a project repo = project-scoped; `~/.claude/` = global across all projects
 - `{{GITHUB_REPO}}` placeholder in agents must be replaced at install time — `forge-adapt` handles this automatically; manual installs need `sed -i 's/{{GITHUB_REPO}}/owner\/repo/g'`
 
-**Extending ticket-gate's dynamic routing:** The dynamic agent table inside `ticket-gate.md` maps issue labels and body keywords to specialist agents. To add a new project-specific agent to the gate, add a row to that table and a corresponding "Dynamic Agent Definitions" section. See `docs/guides/agent-selection.md` for the pattern.
+**Extending ticket-gate's dynamic routing:** The dynamic agent table inside `ticket-gate.md` maps issue labels and body keywords to specialist agents. To add a new project-specific agent to the gate, add a row to that table and a corresponding "Dynamic Agent Definitions" section.
 
 **forge-adapt skill** analyses the target project (stack, domain, existing agents), recommends the most relevant forge-kit components with reasoning, generates project-customised versions of each approved component, and surfaces items worth contributing back to forge-kit. Step 0 auto-updates itself from GitHub before running. Also responds to "upgrade-audit" for backward compatibility.
 
