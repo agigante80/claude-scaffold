@@ -1,6 +1,6 @@
 ---
 name: claude-plugin-cli-facts
-description: "probed 2.1.265, re-probed 2.1.267: cache keyed by version, a broken dependency installs silently, details ignores preloads and needs --plugin-dir, plugin tag checks an entry version we do not keep"
+description: "probed 2.1.265 and 2.1.267: no deprecation field, a broken dependency installs silently and resolves only on install, details ignores preloads and needs --plugin-dir"
 metadata:
   type: reference
 ---
@@ -31,3 +31,7 @@ Related: [[verify-against-installed-artifacts]], which is why every line above w
 - **`plugin details` still does not charge preloads**, re-confirmed: a companion grown from 14 to 5,000 words moved its own on-invoke figure from `< 20` to `~7.2k` and left the declaring agent at `~40`. Its numbers round to two significant figures with a `< 20` floor, so nothing can ratchet on them.
 - **`claude plugin tag <path> --dry-run`** validates plugin.json against the enclosing MARKETPLACE ENTRY's `version` field, and fires only where an entry HAS one (`✘ Version mismatch: plugin.json says "0.1.0" but ... plugins[0].version says "9.9.9"`). forge-kit's entries carry none by design, so the check is vacuous here and is a different invariant from `check-plugin-version-bump.sh`.
 - **Probe safely with `CLAUDE_CONFIG_DIR=<tmpdir>`**: every plugin subcommand honours it, so an install probe never touches the real config. Verified afterwards that no probe marketplace reached `~/.claude`.
+
+**There is NO deprecation field, probed 2026-09-10 on 2.1.267.** Both `"deprecated"` and `"supersededBy"` come back as `Unknown field ... Claude Code ignores it at load time` and pass validation WITH A WARNING. Since #173 committed this repo to zero warnings, adding either would break its own rule, so a retirement is communicated by the CHANGELOG, the group description and forge-adapt, and never by a manifest field.
+
+**A dependency added to an ALREADY-INSTALLED plugin is resolved by nothing.** Resolution happens on INSTALL only. Adding a `dependencies` entry therefore breaks every existing install until `claude plugin install <dep>` is run once; the error is loud and names the command, which is the right behaviour, but it is a real upgrade cost. Verified on the maintainer's own machine within an hour of #169 shipping.

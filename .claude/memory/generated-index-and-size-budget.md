@@ -1,6 +1,6 @@
 ---
 name: generated-index-and-size-budget
-description: "Both #96 and #97 shipped; the ratchet paid for seven fixes then exhausted, so #150 needs a capability or policy decision, not more compression"
+description: "#96/#97 shipped, #150 set an orchestrator number, #174 added the always-on cost and #176 kept words as the unit; scripting a rule is the only lever that shrinks adapt"
 metadata:
   type: project
 ---
@@ -57,3 +57,28 @@ the closed #109) now needs a capability decision or a policy change, not more co
 Scripting prose is the one lever that worked without cost: #149 turned Step 3A's 544 words into a
 68-test executable and made the removed part more trustworthy, not less. See
 [[shipped-asset-path-resolution]] for the trap that shipping such an asset opens.
+
+## Outcome, 2026-09-10: the decision was made, and then the question changed twice
+
+#150 landed as a POLICY change with its number stated: an ORCHESTRATOR (mechanically, an agent
+whose `tools:` declares `Agent`) gets 4000 with a 6000 ceiling, and the metric was re-derived to
+charge an agent for what it PRELOADS. `ticket-gate` went 6355 to 5709 across that work without
+losing a capability.
+
+Then two tickets asked whether the budget measures the right thing at all, and both answers are
+now in `check-component-size.sh` rather than in anyone's head:
+
+- **#174**: the budget measured the ON-INVOKE cost (the body) and was silent about the ALWAYS-ON
+  cost (the description, paid every session for a component you never invoke). That is now
+  reported and deliberately NOT budgeted, because a description too short stops the component
+  being found. The tree went 14,711 to 12,339 characters of description with all 48 quoted trigger
+  phrases intact, by deleting sentences each component's body already carried.
+- **#176**: the unit is WORDS, which nobody outside this repo uses, while Anthropic states 500
+  LINES. All 20 of `adapt`'s fenced blocks were classified before anything moved: sixteen are
+  commands the skill runs, four are templates it emits, none is reference material. Nothing could
+  move, so the line count is reported beside the words and gates nothing.
+
+**The lever that has ever worked is still the same one.** Converting a rule into a tested script
+(#149) has now shrunk `adapt` four times, including twice in one day, and in #179 it was the only
+reason a second half of a rule could be added at all: as prose it would not have fitted. When this
+file needs to grow, that is the move, not a baseline request.

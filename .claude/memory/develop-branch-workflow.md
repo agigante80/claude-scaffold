@@ -1,6 +1,6 @@
 ---
 name: develop-branch-workflow
-description: Work lands on develop and merges to main with no PRs (2026-09-08); the range guards are pull_request-only, so pre-push is now the only thing enforcing them
+description: maintainer decision 2026-09-08; both range guards now run on push too (#158), so pre-push duplicates CI rather than substituting for it
 metadata:
   type: feedback
 ---
@@ -25,9 +25,15 @@ to the push branches; a code review found it, not the workflow change itself.
 The second is now FIXED (#158, 2026-09-08). Both range guards were wired `pull_request`-only, so
 they ran in CI on no path; they now run on `push` too, with the base resolved by
 `scripts/resolve-range-base.sh` rather than by a YAML expression, because `github.event.before` is
-all-zeroes on a created ref and may be unreachable after a force push. `.githooks/pre-push` is the only thing enforcing them, which
-makes `git config core.hooksPath .githooks` a requirement and `--no-verify` a decision rather than
-a shortcut. Issue #158 tracks restoring the server-side half. Until it lands, never assume a
-version bump was checked by anything except the local hook.
+all-zeroes on a created ref and may be unreachable after a force push. **`.githooks/pre-push` now
+DUPLICATES CI rather than substituting for it**: its value is giving the same answer before the
+push rather than after, so `git config core.hooksPath .githooks` is worth having and `--no-verify`
+is a decision rather than a shortcut. The tail of this note used to say the hook was the only
+enforcement and that #158 was still open; both were true when written and neither is now.
+
+**Observed across a long session on 2026-09-10, 21 pushes:** the pre-commit hook refused two of
+them, each time correctly, and each time for a plugin group changed without a semver bump. On the
+largest deletion this repo has made (11 components, one whole group) it was the thing that caught
+the omission. Treat a refusal as the guard working, not as friction.
 
 Related: [[bounded-review-loop-in-practice]], [[generated-index-and-size-budget]].
