@@ -437,6 +437,8 @@ runtime check could see that.
 
 **`temp/`** is a gitignored scratch folder (`temp/*` ignored, `.gitkeep` tracked). Use it for throwaway analysis output. Anything there is untracked by design, so never cite it as a source of truth or assume a later session can see it.
 
+**`docs/guides/without-claude-code.md` is the entry point for the OTHER audience (#183).** `AGENTS.md` answers "how do I change this repository" and points at CLAUDE.md; that page answers "how do I use this governance in my own project with a different agent, or none" and is written for a reader with no forge-kit vocabulary. It names the four portable artifacts, the shell that can actually be run, and a table of what is NOT available, which is the part that makes the rest credible: the critic, the verdict, auto-synthesis, the hooks, the size budget, drift detection and forge-adapt all need Claude Code. **The rules are portable and the mechanical checks are portable; the judgement is not.** Keep that page honest before making it shorter.
+
 **`docs/roadmap.md`** is forge-kit's own roadmap, and the repo is the first project to install
 `forge-kit-roadmap`. It owns which phases exist and their state; the host's milestones own which
 phase each ticket is in. Never record phase membership in the roadmap: that is the duplication the
