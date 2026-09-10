@@ -143,7 +143,7 @@ Version column is the group's `plugin.json` semver (the unit of install), not a 
 | `forge-kit-adapt` | 0.7.0 | skill: adapt |
 | `forge-kit-devops` | 0.12.1 | agents: dep-auditor, health-check; command: ci-health; skills: find-dead-code, forge-host, github-to-forgejo, release, release-automation; hook: block-legacy-host-push; shell assets: forge-lib, release-run, sync-labels, version-lib |
 | `forge-kit-governance` | 0.15.0 | agent: ticket-gate; command: gate-ticket; skills: closing-sessions, decision-brief, ticket-gate-reference, working-overnight; hooks: block-dashes, overnight-continue, overnight-guard; shell assets: check-ticket-mechanics, forge-gate-mechanics |
-| `forge-kit-review` | 0.4.0 | agents: architect-review, code-reviewer, code-simplifier, coding-standards-auditor; command: full-review |
+| `forge-kit-review` | 0.4.1 | agents: architect-review, code-reviewer, code-simplifier, coding-standards-auditor; command: full-review |
 | `forge-kit-roadmap` | 0.8.2 | command: phase; skill: roadmap-phases; shell assets: check-phases, roadmap-lib, sync-phases |
 | `forge-kit-security` | 0.8.0 | agents: api-security-tester, security-auditor; skills: leak-guard, owasp-api-security, privacy-regime; shell assets: check-private-leaks, check-public-leaks |
 | `forge-kit-testing` | 0.3.0 | skill: mutation-sweep |
