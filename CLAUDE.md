@@ -458,6 +458,16 @@ host being reachable; the three host rules run in CI and from `/phase`.
 **Work happens on `develop` and is merged to `main` when green. No pull requests**
 (maintainer decision, 2026-09-08). Commit and merge without waiting to be asked.
 
+**Gate a ticket before implementing it (maintainer decision, 2026-09-10).** Run `/gate-ticket <N>`
+on every NEW ticket before work starts. The reason is dogfooding rather than ceremony: #184 found
+that this repository ships a ticket gate and had never gated a ticket, with not one of the last
+thirty issues carrying a gate review comment, so the kit's most distinctive mechanism was
+unexercised on the repository that ships it, exactly as the label taxonomy was before #104. Expect
+Step 0c to fire on a hand-filed ticket: it synthesises the missing sections and rewrites that
+ticket's body on the forge, which is the behaviour nobody here had seen on a live ticket.
+**Existing closed tickets are NOT retro-gated**, because Step 0c would rewrite bodies of work
+already shipped.
+
 **Both range guards now run on `push` as well as `pull_request` (#158).** They were
 `pull_request`-only, so once work stopped arriving as pull requests they ran on no path at all and
 `.githooks/pre-push` was the only thing enforcing them. The base is resolved by
