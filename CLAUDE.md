@@ -101,7 +101,7 @@ cross-agent instruction format); keep it a pointer, never duplicate content into
 
    - **`forge-host/assets/sync-labels.sh`** (`scripts/test-sync-labels.sh`, 22 tests, in CI): makes the host's labels match `.github/labels.yml`, or `--check` reports that they do not. Host-aware through `forge-lib.sh` (GitHub updates a label by NAME, Forgejo by ID) and **never deletes**: an undeclared label is reported and left alone, because GitHub ships stock defaults and a sync that deletes what it does not recognise is a footgun aimed at other people's data. A malformed `labels.yml` line REFUSES the whole run rather than skipping the entry, since a silent partial sync is the drift it exists to end. Driven in tests by a stub `forge-lib.sh` placed beside a copy of the script, so the script sources the stub instead of the transport.
 
-   - **`leak-guard/assets/check-public-leaks.sh`** (`scripts/test-check-public-leaks.sh`, 72 tests,
+   - **`leak-guard/assets/check-public-leaks.sh`** (`scripts/test-check-public-leaks.sh`, 80 tests,
      in CI): the PUBLIC half of the leak guard (#99, split as #155). Catches home-path shapes,
      unlisted `~/` roots and reachable email addresses, and forge-kit runs it on its own tree the
      way it runs `block-dashes` on itself. Every rule has a NEAR-MISS case as well as a firing one,
