@@ -2,9 +2,9 @@
 <!-- Add entries here as Claude Code builds up project memory across conversations. -->
 
 - [Hook install model](hook-install-model.md) - three install shapes (plugin, project-local, repo dogfooding) and three gate shapes in hooks.json; the sentinel gates only ONE branch
-- [Sister project: vibe-coding-prompts](sister-project-vibe-coding-prompts.md) - Same author's prompt library; shares forge-kit's version-gate DNA and has mechanisms worth borrowing; cross-review 2026-08-28 filed tickets both ways
+- [Sister project: vibe-coding-prompts](sister-project-vibe-coding-prompts.md) - the ON-RAMP for people starting with AI, so duplication is by design; ticket pass done 2026-09-10, and its short prompts are its best ones
 - [Recovering findings from a dead code-review fork](code-review-fork-recovery.md) - Subagent transcripts under subagents/agent-*.jsonl hold complete reports; recover rather than re-run, and check which SHA was reviewed
-- [The review-loop trip wire in practice](bounded-review-loop-in-practice.md) - Fired 6 times plus a preemptive stop; on prose the loop injects defects and on code it converges, so ask whether a TEST can hold the fix down
+- [The review-loop trip wire in practice](bounded-review-loop-in-practice.md) - fired 6 times plus two preemptive stops; it governs TICKET GATING too, and stopped one at two rounds on 2026-09-10
 - [Inventory drift and component size](generated-index-and-size-budget.md) - #96/#97 shipped, #150 set an orchestrator number, #174 added the always-on cost and #176 kept words as the unit; scripting a rule is the only lever that shrinks adapt
 - [Downstream tickets quote adapted copies](downstream-tickets-quote-adapted-copies.md) - A ticket filed from a forge-adapt install may quote ITS adapted text as forge-kit canon; #101 did, and the quote was in no branch of the history
 - [gh CLI cannot read /tmp (snap confinement)](gh-cli-cannot-read-tmp.md) - Snap-confined gh has a private /tmp, so --body-file from the scratchpad fails; stage issue bodies in the repo's gitignored temp/ instead
@@ -17,4 +17,5 @@
 - [Research external practice before handing over a judgment call](research-before-presenting-a-judgment-call.md) - maintainer 2026-09-09: do not just cost my own options; check upstream docs and the reference implementation, then give pros, cons and a recommendation
 - [Check who actually ships it before writing the comparison](verify-provenance-before-publishing-a-comparison.md) - 2026-09-10: five near-duplicates were credited to Anthropic and are wshobson/agents; read known_marketplaces.json before naming a publisher
 - [Every ticket here fails every mechanical check, and why](tickets-here-are-hand-filed-so-mechanics-all-fail.md) - hand-filed via gh issue create, so no template-version marker and no ### headings; Step 3A returns 0 pass on every ticket (#184 asks which side is wrong)
-- [Gate every new ticket before implementing it](gate-new-tickets-from-now-on.md) - maintainer decision 2026-09-10 after #184 found the gate had never run here; new tickets only, never retro-gate the closed backlog
+- [Gate every new ticket before implementing it](gate-new-tickets-from-now-on.md) - maintainer decision 2026-09-10; six runs cost 110k to 225k tokens each and found five defects in none of the tickets, but do not expect that ratio to hold
+- [A ticket that asserts something about the tree is making a claim](a-ticket-assertion-is-a-claim-check-it.md) - the gate caught four false factual claims in my own tickets on 2026-09-10; run the grep, run the suite, and ask whether the criterion can fail

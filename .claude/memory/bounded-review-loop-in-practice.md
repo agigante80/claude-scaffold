@@ -1,6 +1,6 @@
 ---
 name: bounded-review-loop-in-practice
-description: Fired 6 times plus a preemptive stop; on prose the loop injects defects and on code it converges, so ask whether a TEST can hold the fix down
+description: fired 6 times plus two preemptive stops; it governs TICKET GATING too, and stopped one at two rounds on 2026-09-10
 metadata:
   type: feedback
 ---
@@ -111,3 +111,24 @@ the independent oracle that replaced it disagreed on its first run, and the pars
 is the oracle doing its job in the direction nobody expects.
 
 **How to apply:** when a round's findings are mostly "this new clause contradicts an older clause it did not update", stop and ticket. That signal usually means the component is too large ([[generated-index-and-size-budget]] tracks the size half of this problem), not that the reviewer is being picky.
+
+## The loop applies to TICKET GATING too, and it stopped one on 2026-09-10
+
+Three tickets (#185, #186, #187) were gated, rewritten against the findings, and re-gated. Every
+round 2 returned NEEDS-WORK, and every round 2's findings were **in the round-1 fix**: a boundary
+that reconciled with the wrong neighbouring rule, a decision set that contradicted the component's
+own safety file, an acceptance criterion that had become vacuous.
+
+That is one round of fix-induced findings on each ticket, which is one short of the trip wire, and
+every finding was classed **significant, none fundamental**, so the contract did not license a
+third round either.
+
+**Stopped there.** The three were implemented from the rewritten bodies and everything unfixed
+became a ticket (#189 to #192). Continuing would have been "review until green", which has no
+natural end: a reviewer asked to find problems will find them, eventually in the fixes from the
+previous round.
+
+**The generalisation worth keeping:** the contract was written for code review and reads as if it
+is about diffs, but it governs any loop where a reviewer inspects work and the author responds. A
+ticket-gating loop is one. So is a documentation review. Count the rounds and honour the trip wire
+in all of them.
